@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Senha</title>
+<style>
+    body{
+        background: rgb(235, 228, 235);
+    }
+
+    .box{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    h1{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 80px;
+    }
+
+    input{
+        height: 30px;
+        width: 300px;
+    }
+
+    button{
+        background-color: #4CAF50; 
+        color: white;            
+        padding: 10px 20px;       
+        border: none;            
+        border-radius: 5px;      
+        cursor: pointer;         
+        font-size: 16px;         
+        }
+
+        button:hover {
+            background-color: #45a049; /* Cor ao passar o mouse */
+        }
+
+        button:active {
+            background-color: #3e8e41; /* Cor ao clicar */
+            transform: scale(0.98);    /* Efeito de "apertar" */
+        }
+
+</style>
+
+</head>
+<body>
+    <h1>Gerador de Senha Inicial do Aluno</h1>
+    <div class="box"> 
+        <p>Nome Completo:</p>
+        <input id="nome" type="text" placeholder="Digite seu nome completo"/>
+        <button onclick="gerarSenha()">Gerar Senha</button>
+        <div id="result"></div>
+    </div>
+
+<script>
+    function gerarSenha() {
+      const input = document.getElementById('nome').value.trim();
+      const resultDiv = document.getElementById('result');
+
+
+      // Verifica se o nome completo foi informado
+      if (!input || !input.includes(' ')) {
+        resultDiv.textContent = 'Erro: Por favor, insira o nome completo.';
+        resultDiv.style.color = 'red';
+        return;
+      }
+
+      // Divide o nome completo
+      const partesNome = input.split(' ');
+      const sobrenome = partesNome[partesNome.length - 1].toLowerCase(); //toLowerCase para letras minusculas
+
+      // Conta o número de vogais no nome completo
+      const vogais = input.match(/[aeiouáéíóúàèìòùâêîôûãõäëïöüç]/gi) || [];
+      const numeroVogais = vogais.length.toString().padStart(2, '0');
+
+      // Gera a senha
+      const senha = `${sobrenome}${numeroVogais}`;
+      resultDiv.textContent = `Senha gerada: ${senha}`;
+      resultDiv.style.color = 'green';
+    }
+
+  </script>
+  
+</body>
+</html>
